@@ -9,7 +9,7 @@ const postsRoute = ({ app }) => {
     const {
       body: { title, content, user_id, isPublished },
     } = req;
-
+    console.log({ body: req.body });
     try {
       const user = UserModel.query().findOne({ user_id });
 
@@ -24,12 +24,13 @@ const postsRoute = ({ app }) => {
       const post = await PostModel.query().insertAndFetch({
         title,
         content,
-        user_id,
+        user_id: Number(user_id),
         isPublished,
       });
 
       res.send(post);
     } catch (err) {
+      console.log(err);
       res.status(500).send({ error: "oops." });
     }
   });
