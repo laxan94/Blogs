@@ -9,7 +9,6 @@ const postsRoute = ({ app }) => {
     const {
       body: { title, content, user_id, isPublished },
     } = req;
-    console.log({ body: req.body });
     try {
       const user = UserModel.query().findOne({ user_id });
 
@@ -30,7 +29,6 @@ const postsRoute = ({ app }) => {
 
       res.send(post);
     } catch (err) {
-      console.log(err);
       res.status(500).send({ error: "oops." });
     }
   });
